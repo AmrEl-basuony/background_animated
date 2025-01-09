@@ -24,7 +24,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    background_animated:
+    background_animated: ^0.1.0
 ```
 
 
@@ -33,8 +33,7 @@ dependencies:
 You can install packages from the command line:
 
 ```bash
-$ pub get
-..
+$ pub get background_animated
 ```
 
 Alternatively, your editor might support pub. Check the docs for your editor to learn more.
