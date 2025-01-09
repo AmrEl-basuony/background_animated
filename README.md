@@ -11,7 +11,6 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-[![Pub Version](https://img.shields.io/pub/v/parallax_rain.svg?style=flat-square)](https://pub.dev/packages/background_animated)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 # Background animated
@@ -81,8 +80,6 @@ Starfield(
     ),
 ),
 ```
-
-A full example can be found in the example directory
 
 ## About me
 

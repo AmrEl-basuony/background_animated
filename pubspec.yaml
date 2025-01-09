@@ -1,7 +1,7 @@
 name: background_animated
 description: "A new Flutter package project."
 version: 0.1.0
-homepage:
+homepage: https://github.com/AmrEl-basuony/background_animated
 
 environment:
   sdk: ^3.6.0
