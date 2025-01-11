@@ -1,6 +1,6 @@
 name: background_animated
 description: "a package that provides animations to use in the background or foreground"
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/AmrEl-basuony/background_animated
 
 environment:
