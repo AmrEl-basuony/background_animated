@@ -7,7 +7,7 @@ class ParallaxRain extends StatefulWidget {
     this.dropFallSpeed = 1,
     this.numberOfLayers = 3,
     this.dropHeight = 20,
-    this.dropWidth = 1,
+    this.dropWidth = 5,
     this.dropColors = const [Colors.greenAccent],
     this.trailStartFraction = 0.3,
     this.distanceBetweenLayers = 1,
@@ -16,6 +16,8 @@ class ParallaxRain extends StatefulWidget {
     this.trail = false,
     this.alignment = Alignment.center,
     this.degrees = 0,
+    this.shape = const CircleBorder(side: BorderSide()),
+    this.fillShape = false,
   })  : assert(numberOfLayers >= 1, "The minimum number of layers is 1"),
         assert(dropColors.length >= 1, "The drop colors list cannot be empty"),
         assert(distanceBetweenLayers > 0,
@@ -30,10 +32,10 @@ class ParallaxRain extends StatefulWidget {
   /// Number of layers for the parallax effect
   final int numberOfLayers;
 
-  /// Height of each drop
+  /// Height of each drop, the smaller from width and height is used as the limit for the drop size
   final double dropHeight;
 
-  /// Width of each drop
+  /// Width of each drop, the smaller from width and height is used as the limit for the drop size
   final double dropWidth;
 
   /// Color of each drop
@@ -42,7 +44,7 @@ class ParallaxRain extends StatefulWidget {
   /// Fraction of the drop at which the trail effect begins, value ranges from 0.0 to 1.0
   final double trailStartFraction;
 
-  /// Whether the drops have a trail or not
+  /// Whether the drops have a trail or not, it is visible only when shape is filled
   final bool trail;
 
   /// Distance between each layer
@@ -59,6 +61,12 @@ class ParallaxRain extends StatefulWidget {
 
   /// The degrees to rotate the rain by
   final double degrees;
+
+  /// The shape that btw needs a BorderSide() otherwise it will not be visible due to BorderSide.none
+  final OutlinedBorder shape;
+
+  /// Whether the shape should be filled or not
+  final bool fillShape;
 
   @override
   State<StatefulWidget> createState() => ParallaxRainState();
@@ -80,6 +88,8 @@ class ParallaxRainState extends State<ParallaxRain> {
     super.initState();
     runAnimation();
     parallaxRainPainter = ParallaxRainPainter(
+      shape: widget.shape,
+      fillShape: widget.fillShape,
       degrees: widget.degrees,
       numberOfDrops: widget.numberOfDrops,
       dropFallSpeed: widget.dropFallSpeed,

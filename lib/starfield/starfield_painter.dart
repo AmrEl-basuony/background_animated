@@ -13,9 +13,11 @@ class StarfieldPainter extends CustomPainter {
   final List<Color> starColors;
   final ValueNotifier notifier;
   final OutlinedBorder shape;
+  final bool fillShape;
   Random random = Random();
 
   StarfieldPainter({
+    required this.fillShape,
     required this.numberOfStars,
     required this.speed,
     required this.trail,
@@ -30,13 +32,16 @@ class StarfieldPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     for (int i = 0; i < numberOfStars; i++) {
-      stars.add(StarModel.create(
-        size.width,
-        size.height,
-        random,
-        starColors[random.nextInt(starColors.length)],
-        shape,
-      ));
+      stars.add(
+        StarModel.create(
+          size.width,
+          size.height,
+          random,
+          starColors[random.nextInt(starColors.length)],
+          shape,
+          fillShape,
+        ),
+      );
     }
   }
 

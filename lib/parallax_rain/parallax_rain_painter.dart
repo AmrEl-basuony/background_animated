@@ -19,9 +19,13 @@ class ParallaxRainPainter extends CustomPainter {
   final double distanceBetweenLayers;
   final double degrees;
   late final ValueNotifier notifier;
+  final OutlinedBorder shape;
+  final bool fillShape;
   Random random = Random();
 
   ParallaxRainPainter({
+    required this.shape,
+    required this.fillShape,
     required this.numberOfDrops,
     required this.degrees,
     required this.dropFallSpeed,
@@ -66,8 +70,10 @@ class ParallaxRainPainter extends CustomPainter {
     canvas.translate(size.width / 2, size.height / 2);
     canvas.rotate(degrees * (pi / 180));
     size = Size(
-        size.width * cos(degrees * (pi / 180)) + size.height * sin(degrees * (pi / 180)),
-        size.width * sin(degrees * (pi / 180)) + size.height * cos(degrees * (pi / 180)));
+        size.width * cos(degrees * (pi / 180)) +
+            size.height * sin(degrees * (pi / 180)),
+        size.width * sin(degrees * (pi / 180)) +
+            size.height * cos(degrees * (pi / 180)));
     canvas.translate(-size.width / 2, -size.height / 2);
 
     if (dropList.isEmpty) {
@@ -96,21 +102,33 @@ class ParallaxRainPainter extends CustomPainter {
           .dropColor
           .withValues(alpha: ((dropList[i].dropLayer + 1) / numberOfLayers));
 
-      // draw drop
-      canvas.drawRect(
-        dropList[i].drop,
-        (trail)
-            ? (Paint()
-              ..shader = LinearGradient(
-                stops: [trailStartFraction, 1.0],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [paintObject.color, Colors.transparent],
-              ).createShader(
+      fillShape
+          ? canvas.drawPath(
+              shape.getOuterPath(
                 dropList[i].drop,
-              ))
-            : paintObject,
-      );
+              ),
+              (trail)
+                  ? (Paint()
+                    ..shader = LinearGradient(
+                      stops: [trailStartFraction, 1.0],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [paintObject.color, Colors.transparent],
+                    ).createShader(
+                      dropList[i].drop,
+                    ))
+                  : paintObject,
+            )
+          : shape
+              .copyWith(
+                side: shape.side.copyWith(
+                  color: paintObject.color,
+                ),
+              )
+              .paint(
+                canvas,
+                dropList[i].drop,
+              );
     }
   }
 

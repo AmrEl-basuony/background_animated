@@ -11,6 +11,7 @@ class Starfield extends StatefulWidget {
     this.trail = false,
     this.alignment = Alignment.center,
     this.shape = const CircleBorder(side: BorderSide()),
+    this.fillShape = false,
   }) : assert(colors.length >= 1, "The shape colors list cannot be empty");
 
   /// Number of shapes on screen at any moment
@@ -36,6 +37,9 @@ class Starfield extends StatefulWidget {
 
   /// The shape that btw needs a BorderSide() otherwise it will not be visible due to BorderSide.none
   final OutlinedBorder shape;
+
+  /// Whether the shape should be filled or not
+  final bool fillShape;
 
   @override
   State<Starfield> createState() => _StarfieldState();
@@ -63,6 +67,7 @@ class _StarfieldState extends State<Starfield> {
       trail: widget.trail,
       starColors: widget.colors,
       shape: widget.shape,
+      fillShape: widget.fillShape,
     );
   }
 

@@ -8,8 +8,10 @@ class StarModel {
   final Random random;
   final Color color;
   final OutlinedBorder shape;
+  final bool fillShape;
 
   StarModel({
+    required this.fillShape,
     required this.x,
     required this.y,
     required this.z,
@@ -22,8 +24,9 @@ class StarModel {
   });
 
   factory StarModel.create(double width, double height, Random random,
-      Color color, OutlinedBorder shape) {
+      Color color, OutlinedBorder shape, bool fillShape) {
     return StarModel(
+      fillShape: fillShape,
       x: random.nextDouble() * width * 2 - width,
       y: random.nextDouble() * height * 2 - height,
       z: random.nextDouble() * width,
@@ -57,18 +60,27 @@ class StarModel {
     double r = (1 - z / width) * 16;
     if (r < 0) r = 0;
 
-    shape
-        .copyWith(
-          side: shape.side.copyWith(
-            color: color,
-          ),
-        )
-        .paint(
-            canvas,
-            Rect.fromCircle(
-              center: Offset(sx, sy),
-              radius: r,
-            ));
+    fillShape
+        ? canvas.drawPath(
+            shape.getOuterPath(
+              Rect.fromCircle(
+                center: Offset(sx, sy),
+                radius: r,
+              ),
+            ),
+            paint)
+        : shape
+            .copyWith(
+              side: shape.side.copyWith(
+                color: color,
+              ),
+            )
+            .paint(
+                canvas,
+                Rect.fromCircle(
+                  center: Offset(sx, sy),
+                  radius: r,
+                ));
 
     double px = (x / pz) * width / 2 + width / 2;
     double py = (y / pz) * height / 2 + height / 2;

@@ -30,7 +30,6 @@ class HomeScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ParallaxRain(
-              degrees: 30,
               dropColors: [...Colors.primaries, ...Colors.accents],
             ),
           ),
