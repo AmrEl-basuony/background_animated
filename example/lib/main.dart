@@ -38,6 +38,12 @@ class HomeScreen extends StatelessWidget {
               colors: [...Colors.primaries, ...Colors.accents],
             ),
           ),
+          Expanded(
+            child: Fireworks(
+              shapeColors: [...Colors.primaries, ...Colors.accents],
+              particleColors: [...Colors.primaries, ...Colors.accents],
+            ),
+          ),
         ],
       ),
     );

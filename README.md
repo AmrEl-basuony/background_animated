@@ -24,7 +24,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    background_animated: ^0.1.0
+    background_animated: ^0.3.0
 ```
 
 
@@ -74,6 +74,20 @@ Starfield(
         ...Colors.primaries,
         ...Colors.accents,
     ],
+    child: Text(
+        "Text Here",
+    ),
+),
+```
+
+If you want to give `YourWidget` a fireworks background, just wrap it with the `Fireworks` widget, with `YourWidget` as the child parameter. You can also have the fireworks effect in the foreground, use multiple colors shapes and more! 
+
+For example: 
+
+```Dart
+Fireworks(
+    shapeColors: [...Colors.primaries, ...Colors.accents],
+    particleColors: [...Colors.primaries, ...Colors.accents],
     child: Text(
         "Text Here",
     ),
